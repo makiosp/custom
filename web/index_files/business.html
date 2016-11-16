@@ -1,0 +1,221 @@
+
+<!-- saved from url=(0039)https://snapengage.dropbox.com/business -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <script type="text/javascript" async="" src="./d5c1efed-d0ef-4fca-8c7d-faff398ad272.js.download"></script><script async="" id="db_ip_api" src="./ip(1).json"></script><script async="" id="demandbase_js_lib" src="./phXI6yS7.min.js.download"></script><script src="./jquery.min.js.download"></script>
+    <script>
+      (function(d,b,a,s,e){ var t = b.createElement(a),
+          fs = b.getElementsByTagName(a)[0]; t.async=1; t.id=e;
+          t.src=('https:'==document.location.protocol ? 'https://' : 'http://') + s;
+          fs.parentNode.insertBefore(t, fs); })
+      (window,document,'script','scripts.demandbase.com/phXI6yS7.min.js','demandbase_js_lib');
+    </script>
+  <style id="SnapABug_Style" type="text/css">#SnapABug_WP, #SnapABug_WP div, #SnapABug_WP span, #SnapABug_WP iframe, #SnapABug_WP h1, #SnapABug_WP h2, #SnapABug_WP h3, #SnapABug_WP h4, #SnapABug_WP h5, #SnapABug_WP h6, #SnapABug_WP hr, #SnapABug_WP p, #SnapABug_WP a, #SnapABug_WP big, #SnapABug_WP em, #SnapABug_WP img, #SnapABug_WP q, #SnapABug_WP small, #SnapABug_WP strong, #SnapABug_WP b, #SnapABug_WP u, #SnapABug_WP i, #SnapABug_WP fieldset, #SnapABug_WP input, #SnapABug_WP input[type="submit"], #SnapABug_WP button, #SnapABug_WP textarea, #SnapABug_WP form, #SnapABug_WP label{ margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; font-weight: normal; vertical-align: baseline; float: none;max-width: none; max-height: none; letter-spacing: normal; line-height: normal;text-transform: none;-webkit-transform: none; -moz-transform: none; -ms-transform: none; -o-transform: none; transform: none; -webkit-transition-property: none; -moz-transition-property: none; -o-transition-property: none; transition: none;-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;font-feature-settings: normal; -webkit-font-feature-settings: normal; -moz-font-feature-settings: normal; -ms-font-feature-settings: normal; -o-font-feature-settings: normal;  } #SnapABug_WP *:before, #SnapABug_WP *:after{ display:none; } #SnapABug_WP img{ display: inline-block; } </style><script id="yui__dyn_0" type="text/javascript" src="./servicegetproactivegeodata"></script><script id="yui__dyn_1" type="text/javascript" src="./ServiceGetConfig"></script><script id="yui__dyn_2" type="text/javascript" src="./servicegetallavailableagents"></script><script id="yui__dyn_3" type="text/javascript" src="./servicegetallavailableagents"></script><script id="yui__dyn_4" type="text/javascript" src="./ServiceGetConfig"></script><script id="yui__dyn_5" type="text/javascript" src="./ServiceGetConfig"></script></head>
+  <body style="background-color: transparent">
+    <script type="text/javascript">
+
+      (function($j) {
+        var IS_PROD = (window.location.host === 'snapengage.dropbox.com')
+        var DEV_TARGET_URL = "https://meta-dbdev.dev.corp.dropbox.com";
+        var PROD_TARGET_URL = "https://www.dropbox.com";
+        var PROACTIVE_ID = "d5c1efed-d0ef-4fca-8c7d-faff398ad272";
+        var REACTIVE_ID = "aac361ec-f445-43be-a7c8-a6d25df31ced";
+        var SUPPORT_ID;
+        var done = false;
+
+        function initializeVisitorInfo(data) {
+          window.chatData = {
+            'FirstName': data.FirstName,
+            'LastName': data.LastName,
+            'Email': data.Email,
+            'SessionID': data.SessionID,
+            'Country': data.Country,
+            'MktoInfo': data.MktoInfo,
+            'Pricing': data.pricing,
+            'user_id': data.user_id,
+            'proactiveMessage': '',
+            'proactiveAgentName': '',
+            'visitorFirstTimeVisitor': '',
+            'visitorAmountOfPreviousChats': '',
+            'visitorAmountOfPagesVisited': '',
+            'visitorTimeOnSite': '',
+            'visitorTimeOnPage': '',
+            //EXPERIMENT (ribant) subgrowth_biz_orion_space_messaging
+            'exp_subgrowth_biz_orion_space_messaging': data.exp_subgrowth_biz_orion_space_messaging
+            //END EXPERIMENT (ribant) subgrowth_biz_orion_space_messaging
+          };
+        }
+
+        function checkChatStatus(widget_id, final_widget_id) {
+          SnapEngage.setWidgetId(widget_id);
+          SnapEngage.getAgentStatusAsync(function(online) {
+            sendMessage('UpdateChatStatus', {'online': online})
+          })
+          if(final_widget_id) {
+            SnapEngage.setWidgetId(final_widget_id);
+          }
+        }
+
+        function updateAdditionalVisitorInfo(agent, msg) {
+          var data = window.chatData;
+          data.proactiveMessage = msg;
+          data.proactiveAgentName = agent;
+          data.visitorFirstTimeVisitor = SnapABugChat.getVisitorIsFirstTimeVisiting();
+          data.visitorAmountOfPreviousChats = SnapABugChat.getVisitorNumberOfPreviousChats();
+          data.visitorAmountOfPagesVisited = SnapABugChat.getVisitorNumberOfPagesVisited();
+          data.visitorTimeOnSite = SnapABugChat.getVisitorTimeOnSite();
+          data.visitorTimeOnPage = SnapABugChat.getVisitorTimeOnPage();
+        };
+
+        function getTargetURL() {
+          return IS_PROD ? PROD_TARGET_URL : DEV_TARGET_URL;
+        }
+
+        function validOriginURL(url) {
+          return url === getTargetURL();
+        }
+
+        function startReactiveChat() {
+          SnapEngage.setWidgetId(REACTIVE_ID);
+          SnapEngage.setStartChat('');
+          SnapEngage.startLink();
+        }
+
+        function startSupportChat() {
+          SnapEngage.setWidgetId(SUPPORT_ID);
+          SnapEngage.setUserEmail(chatData.Email, true)
+          SnapEngage.startChat("How can we help you today?")
+        }
+
+        function createSnapEngageScript(data) {
+          initializeVisitorInfo(data.chatData)
+
+          chatId = data.chatId
+          if (!chatId){
+            chatId = PROACTIVE_ID
+          }
+
+          // Below is the Demandbase integration with Snapengage. Both sides need to run
+          // asynchronously and there is no callback for completion. Due to this constraint, we
+          // force a delay to make sure Demandbase is called before Snapengage. This might not work
+          // on slow connections, but it is ok to ignore the Demandbase integration if it does not load.
+          // Demandbase will add this request to their roadmap and we will update when ready.
+          var POLL_INTERVAL = 50;
+          var MAX_POLL_COUNT = 10;
+          var pollCount = 0;
+
+          function poll() {
+            pollCount++;
+
+            if ((window.Demandbase && window.Demandbase.IP && window.Demandbase.IP.CompanyProfile) || pollCount === MAX_POLL_COUNT) {
+              (function() {
+                var se = document.createElement('script');
+                se.type = 'text/javascript';
+                se.async = true;
+                se.src = '//storage.googleapis.com/code.snapengage.com/js/'+chatId+'.js';
+                var done = false;
+                se.onload = se.onreadystatechange = function() {
+                  if (!done && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete')) {
+                    done = true;
+
+                    SnapABug.disableLightbox();
+
+                    SnapEngage.setCallback('Open', function() {
+                      sendMessage('Open', {})
+                    });
+
+                    SnapEngage.setCallback('OpenProactive', function(agent, msg) {
+                      updateAdditionalVisitorInfo(agent, msg);
+                      sendMessage('OpenProactive', {'agent': agent, 'msg': msg});
+                    });
+
+                    SnapEngage.setCallback('Close', function(type, agent_status) {
+                      sendMessage('Close', {'type': type, 'agent_status': agent_status});
+                    });
+
+                    SnapEngage.setCallback('StartChat', function(email, msg, type) {
+                      sendMessage('StartChat', {'email': email, 'msg': msg, 'type': type});
+                    });
+
+                    SnapEngage.setCallback('ChatMessageReceived', function(agent, msg) {
+                      sendMessage('ChatMessageReceived', {'agent': agent, 'msg': msg});
+                    });
+
+                    // This is a hack since there is no refresh event. When a user refreshes the page
+                    // SnapEngage will automatically detect this and reopen. Since we are in an
+                    // iframe we need to bubble this back up to the parent so we can open the iframe.
+                    // This is brittle since it relies on the SnapABug_WP id which could change in the
+                    // future.
+                    if ($j('#SnapABug_WP').is(":visible")) {
+                      sendMessage('Open', {});
+                    }
+                    switch(chatId)
+                    {
+                      case PROACTIVE_ID:
+                        checkChatStatus(REACTIVE_ID, PROACTIVE_ID)
+                        SnapEngage.allowProactiveChat(data.allowProactiveChat);
+                        break;
+                      default:
+                        SUPPORT_ID = chatId
+                        checkChatStatus(SUPPORT_ID)
+                        break;
+                    }
+                  }
+                };
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(se, s);
+              })();
+            } else if (pollCount < MAX_POLL_COUNT) {
+              setTimeout(poll, POLL_INTERVAL);
+            }
+          }
+          poll();
+        }
+
+        function receiveMessage(event)
+        {
+          if(!validOriginURL(event.origin)) return;
+
+          var data = event.data
+          switch(data.message_type)
+          {
+            case "checkChatStatus":
+              initializeVisitorInfo(data.chatData)
+              if (data.isSupport){
+                checkChatStatus(SUPPORT_ID)
+              } else {
+                checkChatStatus(REACTIVE_ID, PROACTIVE_ID)
+              }
+              break;
+
+            case "AllowProactiveChat":
+              SnapEngage.allowProactiveChat(data.allowProactiveChat);
+              break;
+
+            case "StartChat":
+              initializeVisitorInfo(data.chatData)
+              startReactiveChat();
+              break;
+
+            case "startSupportChat":
+              initializeVisitorInfo(data.chatData)
+              startSupportChat();
+              break;
+
+            case "createSnapEngageScript":
+              createSnapEngageScript(data);
+              break;
+          }
+        }
+
+        function sendMessage(message_type, data)
+        {
+          data.message_type = message_type;
+          parent.postMessage(data, getTargetURL());
+        }
+
+        window.addEventListener('message', receiveMessage, false);
+
+      })(jQuery);
+    </script>
+  
+
+<iframe src="./ect(1).html" id="db_ect" height="0" width="0" style="display: none;"></iframe><div id="SnapABug_W" style="position: fixed; display: none; top: 0%; left: 0px; width: 100%; height: 100%; z-index: 2147483644; margin: 0px; padding: 0px; border-collapse: collapse; border-spacing: 0px; border: none; list-style: none; text-align: left; font-size: 100%; font-weight: normal; outline: none; background-image: url(&quot;https://storage.googleapis.com/code.snapengage.com/wbg/blank.gif&quot;); background-repeat: repeat;"><div id="SnapABug_O" style="position:absolute;width:100%;height:100%;top:0px;left:0px;text-align:left;z-index:auto;-moz-opacity:0.5;opacity:.50;filter:alpha(opacity=50);background-color:white;"></div></div><div id="SnapABug_WP" style="position: fixed; display: none; z-index: 2147483645; overflow: hidden; margin: 0px; padding: 0px; border-collapse: collapse; border-spacing: 0px; border: none; list-style: none; outline: none;"><div id="SnapABug_P" style="position:absolute;left:0px;top:0px;margin:0;padding:0;border:none;text-align:left;z-index:1;overflow:hidden;background-color:transparent;"></div><div id="SnapABug_IP" style="position:absolute;left:0px;top:0px;z-index:0;"></div><div id="SnapABug_DB" style="position:absolute;left:0px;top:0px;margin:0;border:0;padding:0;z-index:1;cursor:move;background-image:url(&#39;https://storage.googleapis.com/code.snapengage.com/wbg/blank.gif&#39;);background-repeat:repeat;"></div><div id="SnapABug_Snd" style="width:0px;height:0px;font-size:0px;margin:0;padding:0;background-color:transparent;"></div></div><div id="SnapABug_Applet" style="position: fixed; display: none; top: 0%; left: 0px; width: 100%; height: 2px; text-align: left; z-index: 2147483646;"></div></body></html>

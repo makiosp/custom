@@ -1,0 +1,63 @@
+(function() {
+try {
+    (function(){
+	/*
+	https://ad.doubleclick.net/ddm/activity/src=4526719;type=invmedia;cat=FrN6XWYT;ord=1?
+	https://pixel.mathtag.com/event/img?mt_id=295299&mt_adid=113635
+	*/
+
+	var mm_ri = String( Math.random() );
+	mm_ri = mm_ri.replace( /0\./g,'' );
+
+	var mm_protocol = location.protocol;
+	if ( mm_protocol != 'http:' && mm_protocol != 'https:' ){ mm_protocol = 'http:'; }
+
+	var mm_el0 = document.createElement('img');
+	var url0 = 'ad.doubleclick.net/ddm/activity/src=4526719;type=invmedia;cat=FrN6XWYT;ord=1?';
+	url0 = url0.replace("\[RANDOM_NUMBER\]", mm_ri);
+	mm_el0.width = 1;
+	mm_el0.height = 1;
+	mm_el0.src = mm_protocol + '//' + url0;
+
+	var mm_el1 = document.createElement('img');
+	var url1 = 'pixel.mathtag.com/event/img?mt_id=295299&mt_adid=113635';
+	url1 = url1.replace("\[RANDOM_NUMBER\]", mm_ri);
+	mm_el1.width = 1;
+	mm_el1.height = 1;
+	mm_el1.src = mm_protocol + '//' + url1;
+
+
+})();
+//used to sync advertiser without leaking referer to final destination
+(function() {
+    try {
+	var frm = document.createElement('iframe');
+	frm.style.visibility = 'hidden';
+	frm.style.display = 'none';
+	frm.src = "https://pixel.mathtag.com/sync/iframe?mt_uuid=1620581f-7c08-4900-a385-caec399c09a6&no_iframe=1&mt_adid=113635";
+	frm.setAttribute("id", "mm_sync_back_ground");
+	var trys = 0;
+        var interval = setInterval(function(){
+            if (trys++ < 20 && interval && !document.getElementById("mm_sync_back_ground")) {
+                if (document.body) {
+                    if (interval) {
+                        clearInterval(interval);
+                        interval = 0;
+                    }
+                    document.body.appendChild(frm);
+                }
+            }
+        }, 100);
+    }
+    catch(ex)
+    {
+	document.createElement("img").src="//pixel.mathtag.com/error/img?error_domain=synciframe&what="+encodeURIComponent(ex.message);
+    }
+})();
+
+}
+catch(ex)
+{
+   document.createElement("img").src="//pixel.mathtag.com/error/img?error_domain=wrap&what="+encodeURIComponent(ex.message);
+}
+})();
