@@ -1,0 +1,67 @@
+body {color: #919191;	position: relative;	background: #232323;	font-size: 16px;font-family: Roboto, sans-serif, Arial;font-style:normal;font-weight:300; line-height:28px}
+blockquote,body,button,code,dd,div,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,pre,td,textarea,th,ul{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,optgroup,strong,th,var{font-style:inherit}del,ins{text-decoration:none}li{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:400}q:after,q:before{content:''}abbr,acronym{border:0;font-variant:normal}sub,sup{vertical-align:baseline}legend{color:#014182}button,input,optgroup,option,select,textarea{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}button,input,select,textarea{font-size:100%}a:active,a:hover{outline:0}
+a { text-decoration:none;}
+#wrapper { width:1034px; margin:0 auto; padding:10px 0}
+.logo { background:url('https://cdn.pixabay.com/photo/2015/07/31/20/41/background-869596_960_720.png') no-repeat; width:149px; height:148px; margin:0 auto; padding-bottom:20px; overflow:hidden; text-indent:-999px; display:block;}
+.rows{ overflow:hidden;}
+.colum{ width:517px; float:left;}
+.fifaimg{ background:url('http://i.giphy.com/l3vQZg31JGN3UqUPS.gif') no-repeat; width:519px; height:360px;
+-webkit-animation: fifaimg .8s 1 ease-in-out;
+	-moz-animation: fifaimg .8s 1 ease-in-out;
+	-o-animation: fifaimg .8s 1 ease-in-out;
+	-ms-animation: fifaimg .8s 1 ease-in-out;
+	animation: fifaimg .8s 1 ease-in-out; position:relative}
+.lmhtimg{ background:url('http://st.game.thanhnien.vn/image/GO/TG/skin-lmht-12.jpg') no-repeat; width:519px; height:360px;
+-webkit-animation: lmhtimg .8s 1 ease-in-out;
+	-moz-animation: lmhtimg .8s 1 ease-in-out;
+	-o-animation: lmhtimg .8s 1 ease-in-out;
+	-ms-animation: lmhtimg .8s 1 ease-in-out;
+	animation: lmhtimg .8s 1 ease-in-out; position:relative}
+
+.btfifa {-moz-border-radius:20px;-webkit-border-radius:20px;border-radius:20px;text-align:center;text-shadow: 0 1px 1px #333; background:url(../img/bgfo3.jpg) repeat-x; line-height:38px; display:block; width:300px; color:#fff; text-transform:uppercase; font-weight:bold; margin-top:30px; margin-left:150px}
+.btfifa:hover { background:url(../img/bgfo3_hover.jpg) repeat-x; }
+.btlmht{-moz-border-radius:20px;-webkit-border-radius:20px;border-radius:20px;text-align:center;text-shadow: 0 1px 1px #333; background:url(../img/bglmht.jpg) repeat-x; line-height:38px; display:block; width:300px; color:#fff; text-transform:uppercase; font-weight:bold;margin-top:30px; margin-left:50px}
+.btlmht:hover { background:url(../img/bglmht_hover.jpg) repeat-x; }
+
+@-webkit-keyframes fifaimg {
+0% {
+opacity:0;
+left:-100px
+}
+100% {
+opacity:1;
+left:0px
+}
+}
+@-moz-keyframes fifaimg {
+0% {
+opacity:0;
+left:-100px
+}
+100% {
+opacity:1;
+left:0px
+}
+}
+
+@-webkit-keyframes lmhtimg  {
+0% {
+opacity:0;
+right:-100px
+}
+100% {
+opacity:1;
+right:0px
+}
+}
+
+@-moz-keyframes lmhtimg  {
+0% {
+opacity:0;
+right:-100px
+}
+100% {
+opacity:1;
+right:0px
+}
+}
